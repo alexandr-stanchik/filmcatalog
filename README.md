@@ -5,7 +5,7 @@ With this site you can make a list of movies to watch. Available without authori
 
 After registration and authorization, it becomes possible to add favorite films to favorites from the general movie list and indicate their status (want to see, want to see again, completed, haven't seen). If necessary, you can change the status of the movie or remove it from favorites
 
-##Installation:
+## Installation:
 ```sh
 import django
 ```
