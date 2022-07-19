@@ -1,0 +1,40 @@
+{% extends "catalog/base.html" %}
+
+{% block content %}
+    <h1>My movies</h1>
+
+    {% if filminstance_list %}
+       <div class="table-wrapper">
+        <table>
+            <thead>
+            <tr>
+                <th>Movie</th>
+                <th>Genre</th>
+                <th>Director</th>
+                <th>Description</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for filminst in filminstance_list %}
+            <tr>
+                <td><a href="{{ filminst.film.get_absolute_url }}">{{filminst.film.title}}<br>({{filminst.film.year}})</a></td>
+                <td>{{filminst.film.display_genre}}</td>
+                <td>{{filminst.film.director}}</td>
+
+                <td>{{filminst.film.summary|truncatewords:15}}</td>
+                <td>
+                    {{filminst.get_status}}
+                </td>
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+
+    {% else %}
+      <p>There are no tracked movies</p>
+    {% endif %}
+{% endblock %}

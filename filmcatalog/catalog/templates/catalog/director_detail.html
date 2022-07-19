@@ -1,0 +1,21 @@
+{% extends "catalog/base.html" %}
+
+{% block content %}
+
+
+<div style="display:flex"><h1 style="display:inline">{{ director.first_name }} {{ director.last_name }}</h1>
+
+</div>
+
+<p><strong>Info:</strong> <br>{{ director.bio }}</p>
+<p><strong>Birth:</strong> {{ director.date_of_birth }}</p>
+<p><strong>Death:</strong> {{ director.date_of_death }}</p>
+<strong>Movies List:</strong>
+<ul>
+    {% for film in film_list %}
+    <li><a href="{{film.get_absolute_url}}">{{film}}</a></li>
+
+    {% endfor %}
+</ul>
+
+{% endblock %}

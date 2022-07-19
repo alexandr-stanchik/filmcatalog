@@ -1,0 +1,31 @@
+{% extends "catalog/base.html" %}
+{% block content %}
+    <h1>Directors</h1>
+        {% if director_list %}
+       <div class="table-wrapper">
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Bio</th>
+                <th>Born</th>
+                <th>Death</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for director in director_list %}
+            <tr>
+                <td><a href="{{ director.get_absolute_url }}">{{ director.first_name }} {{ director.last_name }}</a></td>
+                <td>{{director.bio|truncatewords:15}}</td>
+                <td>{{director.date_of_birth}}</td>
+                <td>{{director.date_of_death}}</td>
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+      <p>There are no movies in the list.</p>
+    {% endif %} 
+{% endblock %}

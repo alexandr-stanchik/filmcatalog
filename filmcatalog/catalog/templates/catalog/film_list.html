@@ -1,0 +1,32 @@
+{% extends "catalog/base.html" %}
+{% block content %}
+    <h1>Movies</h1>
+        {% if film_list %}
+       <div class="table-wrapper">
+        <table>
+            <thead>
+            <tr>
+                <th>Movie</th>
+                <th>Genre</th>
+                <th>Director</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for film in film_list %}
+            <tr>
+                <td><a href="{{ film.get_absolute_url }}">{{ film.title }}<br>({{film.year}})</a></td>
+                <td>{{film.display_genre}}</td>
+                <td>{{film.director}}</td>
+
+                <td>{{film.summary|truncatewords:15}}</td>
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+      <p>There are no movies in the list.</p>
+    {% endif %} 
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "catalog/base.html" %}
+
+{% block content %}
+<br>
+
+{% if user.is_authenticated %}
+<form method="post" action="">
+    {% csrf_token %}
+    <div class="actions small">
+        {% for status in film.get_status_list %}
+        {% if filminstance_status == status %}
+        <input class="button primary small" formaction='' formmethod="post" type="submit"
+               value="{{ status }}" name="status"/>
+        {% else %}
+        <input class="button small" formaction="{% url 'film-detail' film.pk%}" formmethod="post" type="submit"
+               value="{{ status }}" name="status"/>
+        {% endif %}
+
+        {% endfor %}
+    </div>
+</form>
+{% endif %}
+
+<div style="display:flex"><h1 style="display:inline">{{ film.title }}</h1>
+    {% if user.is_authenticated %}
+        <form style="display:inline">
+            {% csrf_token %}
+            {% if tracked_status == data.tracked_status.tracked %}
+            <input style="position:relative; top:30%; left: 10px" class="button primary small" formaction="{% url 'film-detail' film.pk%}" formmethod="post" type="submit"
+               value="{{ tracked_status }}" name="tracked_status" title="click to untrack"/>
+            {% else %}
+            <input style="position:relative; top:30%; left: 10px" class="button small" formaction="{% url 'film-detail' film.pk%}" formmethod="post" type="submit"
+               value="{{ tracked_status }}" name="tracked_status" title="click to start track"/>
+            {% endif %}
+        </form>
+    {% endif %}
+</div>
+
+<p><strong>Director:</strong> <a href="{{film.director.get_absolute_url}}">{{ film.director }}</a></p> <!-- author detail link not yet defined -->
+<p><strong>Summary:</strong> {{ film.summary }}</p>
+<p><strong>Genre:</strong> {{ film.display_genre_all }}</p>
+<!--  <p><strong>Genre:</strong> {% for genre in film.genre.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>-->
+
+{% endblock %}
