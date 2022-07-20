@@ -29,3 +29,5 @@ import django
     - film 
     - viewer
 
+-Genre
+    -name
